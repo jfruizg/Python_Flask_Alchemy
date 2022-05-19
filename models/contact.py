@@ -5,7 +5,6 @@ class Contact(db.Model):
     fullname = db.Column(db.String(100))
     email = db.Column(db.String(100))
     phone = db.Column(db.String(100))
-    tasks = db.relationship('task', lazy='dynamic')
 
     def __init__(self, fullname, email, phone):
         self.fullname = fullname
