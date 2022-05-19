@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
 contact = Blueprint('python_routes', __name__)
 
@@ -6,8 +6,9 @@ contact = Blueprint('python_routes', __name__)
 def home():
     return render_template('./client/index.html')
 
-@contact.route('/new')
+@contact.route('/new', methods=['POST'])
 def add_contact():
+    print(request.form['fullname'])
     return "save contact"
 
 @contact.route('/update')
