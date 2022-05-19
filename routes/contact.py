@@ -1,13 +1,14 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from models.contact import Contact
 from utils.db import db
 
 
-contact = Blueprint('python_routes', __name__)
+contact = Blueprint('python_contact_routes', __name__)
 
 @contact.route('/')
 def home():
-    return render_template('./client/index.html')
+    all_contact = Contact.query.all()
+    return render_template('./client/index.html', contacts = all_contact)
 
 @contact.route('/new', methods=['POST'])
 def add_contact():
@@ -22,15 +23,30 @@ def add_contact():
     db.session.add(new_contact)
     db.session.commit()
 
-    return "save contact"
+    return redirect(url_for('python_contact_routes.home'))
 
-@contact.route('/update')
-def update_contact():
-    return "update contact"
+@contact.route('/update/<id>', methods = ['POST', 'GET'])
+def update_contact(id):
+    contact = Contact.query.get(id)
+    if request.method == 'POST':
+        contact.fullname = request.form['fullname']
+        contact.email = request.form['email']
+        contact.phone = request.form['phone']
 
-@contact.route('/delete')
-def delete_contact():
-    return "delete contact"
+        db.session.commit()
+
+        return redirect(url_for('python_contact_routes.home'))
+
+    return render_template('./client/update.html', contact = contact)
+
+@contact.route('/delete/<id>')
+def delete_contact(id):
+    contact = Contact.query.get(id)
+
+    db.session.delete(contact)
+    db.session.commit()
+
+    return redirect(url_for('python_contact_routes.home'))
 
 @contact.route('/about')
 def about_contact():
