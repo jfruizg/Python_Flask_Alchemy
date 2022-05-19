@@ -3,7 +3,7 @@ from models.contact import Task
 from utils.db import db
 
 
-task = Blueprint('python_task_routes', __name__)
+task = Blueprint('python_routes', __name__)
 
 @task.route('/task_home')
 def home():
