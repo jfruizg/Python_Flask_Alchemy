@@ -1,6 +1,5 @@
 from flask import Flask
 from routes.contact import contact
-from routes.category import task
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
