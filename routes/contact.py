@@ -25,19 +25,10 @@ def add_contact():
 
     return redirect(url_for('python_contact_routes.home'))
 
-@contact.route('/update/<id>', methods = ['POST', 'GET'])
+@contact.route('/update/<id>', methods = ["POST", "GET"])
 def update_contact(id):
-    contact = Contact.query.get(id)
-    if request.method == 'POST':
-        contact.fullname = request.form['fullname']
-        contact.email = request.form['email']
-        contact.phone = request.form['phone']
-
-        db.session.commit()
-
-        return redirect(url_for('python_contact_routes.home'))
-
-    return render_template('./client/update.html', contact = contact)
+    contact_p = Contact.query.get(id)
+    return render_template('./client/update.html', contact = contact_p)
 
 @contact.route('/delete/<id>')
 def delete_contact(id):
