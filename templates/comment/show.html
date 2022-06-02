@@ -8,8 +8,10 @@
   <div>
 
         <div>
-            <h5>{{contacts.username}}</h5>
-            <p>{{contacts.email}}</p>
+            {% for comment in comments %}
+                <h5>{{comment.text}}</h5>
+                <p>{{comment.created_date}}</p>
+            {% endfor %}
 
             {% with message = get_flashed_messages() %}
                 {% if messages %}
@@ -24,8 +26,6 @@
             {% endwith %}
 
             <div>
-                <a href="{{ url_for('python_contact_routes.update_contact' , id =contacts.id) }}">Update</a>
-                <a href="{{ url_for('python_contact_routes.delete_contact', id =contacts.id) }}">Delete</a>
                 <a href="{{ url_for('python_contact_routes.logout') }}">Log out</a>
                 <a href="{{ url_for('python_comment_routes.home') }}">Create comment</a>
             </div>

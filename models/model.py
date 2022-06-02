@@ -10,6 +10,7 @@ class User(db.Model):
     email = db.Column(db.String(40))
     password = db.Column(db.String(248))
     created_date = db.Column(db.DateTime, default=datetime.datetime.now())
+    comments = db.relationship('Comment')
 
     def __init__(self, username, password, email):
         self.username = username
@@ -21,6 +22,31 @@ class User(db.Model):
 
     def verify_password(self, password):
         return check_password_hash(self.password, password)
+
+class Comment(db.Model):
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    text = db.Column(db.Text())
+    created_date = db.Column(db.DateTime, default=datetime.datetime.now())
+
+    def __init__(self, user_id, text):
+        self.user_id = user_id
+        self.text = text
+
+
+class Log(db.Model):
+    __tablename__ = 'logs'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    text = db.Column(db.Text())
+    created_date = db.Column(db.DateTime, default=datetime.datetime.now())
+
+    def __init__(self, user_id, text):
+        self.user_id = user_id
+        self.text = text
 
 
 

@@ -83,3 +83,5 @@ def cookie():
     response = make_response(render_template("./user.cookies.html"))
     response.set_cookie('custome_cookie', 'Eduardo')
     return response
+
+

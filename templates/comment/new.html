@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+  <form action = "/new_comment" method = "POST">
+      <input type="text" name="text" placeholder="text">
+      <button>
+          save
+      </button>
+  </form>
+
+   <div>
+       <a href="{{ url_for('python_contact_routes.log') }}">Login</a>
+   </div>
+</body>
+</html>

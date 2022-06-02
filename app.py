@@ -1,5 +1,6 @@
 from flask import Flask
 from routes.user import contact
+from routes.comment import comment
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -18,3 +19,4 @@ SQLAlchemy(local)
 
 app.register_blueprint(contact)
 local.register_blueprint(contact)
+local.register_blueprint(comment)
