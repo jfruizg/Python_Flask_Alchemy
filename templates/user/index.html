@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div>
+
+        <div>
+            <h5>{{contacts.username}}</h5>
+            <p>{{contacts.email}}</p>
+
+            <div>
+                <a href="{{ url_for('python_contact_routes.update_contact' , id =contacts.id) }}">Update</a>
+                <a href="{{ url_for('python_contact_routes.delete_contact', id =contacts.id) }}">Delete</a>
+                <a href="{{ url_for('python_contact_routes.logout') }}">Log out</a>
+            </div>
+        </div>
+
+  </div>
+
+</body>
+</html>
