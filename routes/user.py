@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, make_response, session, flash
 from models.model import User
 from utils.db import db
+import xlrd
 
 
 contact = Blueprint('python_contact_routes', __name__)
@@ -72,7 +73,7 @@ def delete_contact(id):
     db.session.delete(contact)
     db.session.commit()
 
-    return redirect(url_for('python_contact_routes.home'))
+    return render_template('./user/register.html')
 
 @contact.route('/about')
 def about_contact():
@@ -83,5 +84,7 @@ def cookie():
     response = make_response(render_template("./user.cookies.html"))
     response.set_cookie('custome_cookie', 'Eduardo')
     return response
+
+
 
 

@@ -28,6 +28,8 @@
             <div>
                 <a href="{{ url_for('python_contact_routes.logout') }}">Log out</a>
                 <a href="{{ url_for('python_comment_routes.home') }}">Create comment</a>
+                <a href="{{ url_for('python_comment_routes.delete_comment', id = comments.id) }}">Delete</a>
+                <a href="{{ url_for('python_comment_routes.import_excel') }}">Import Excel</a>
             </div>
         </div>
 
