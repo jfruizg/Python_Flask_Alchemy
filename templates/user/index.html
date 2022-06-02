@@ -11,6 +11,18 @@
             <h5>{{contacts.username}}</h5>
             <p>{{contacts.email}}</p>
 
+            {% with message = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages  %}
+                            <li>
+                                {{message}}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+
             <div>
                 <a href="{{ url_for('python_contact_routes.update_contact' , id =contacts.id) }}">Update</a>
                 <a href="{{ url_for('python_contact_routes.delete_contact', id =contacts.id) }}">Delete</a>

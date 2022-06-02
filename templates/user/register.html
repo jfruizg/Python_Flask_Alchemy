@@ -5,13 +5,18 @@
     <title>Login</title>
 </head>
 <body>
-  <form action = "/login" method = "POST">
+  <form action = "/register" method = "POST">
       <input type="text" name="username" placeholder="username">
+      <input type="text" name="email" placeholder="email">
       <input type="password" name="password" placeholder="password">
 
       <button>
           save
       </button>
   </form>
+
+   <div>
+       <a href="{{ url_for('python_contact_routes.log') }}">Login</a>
+   </div>
 </body>
 </html>

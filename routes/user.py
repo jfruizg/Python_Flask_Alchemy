@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, make_response, session
+from flask import Blueprint, render_template, request, redirect, url_for, make_response, session, flash
 from models.model import User
 from utils.db import db
 
@@ -11,9 +11,13 @@ def home():
         username = session['username']
         print(username)
         user = User.query.filter_by(username=username).first()
+        success_message = 'Bienvenido {}'.format(username)
+        flash(success_message)
         return render_template('./user/index.html', contacts=user)
     else:
-        return render_template('./user/login.html')
+        delete_message = 'Hasta luego'
+        flash(delete_message)
+        return render_template('./user/register.html')
 
 @contact.route('/logout')
 def logout():
@@ -21,8 +25,28 @@ def logout():
         session.pop('username')
     return redirect(url_for('python_contact_routes.home'))
 
-@contact.route('/new', methods=['POST'])
-def add_contact():
+
+@contact.route('/log')
+def log():
+    return render_template('./user/login.html')
+
+@contact.route('/login', methods=['POST'])
+def login():
+    username = request.form['username']
+    password = request.form['password']
+
+    user = User.query.filter_by(username=username).first()
+    if user is not None and user.verify_password(password):
+        session['username'] = username
+        return redirect(url_for('python_contact_routes.home'))
+    else:
+        return redirect(url_for('python_contact_routes.home'))
+
+
+
+
+@contact.route('/register', methods=['POST'])
+def register():
     username = request.form['username']
     email = request.form['email']
     password = request.form['password']
