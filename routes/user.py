@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, make_response, session, flash
 from models.model import User
 from utils.db import db
-import xlrd
+
 
 
 contact = Blueprint('python_contact_routes', __name__)
@@ -69,6 +69,8 @@ def update_contact(id):
 @contact.route('/delete/<id>')
 def delete_contact(id):
     contact = User.query.get(id)
+
+    session.pop('username')
 
     db.session.delete(contact)
     db.session.commit()

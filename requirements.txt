@@ -10,3 +10,8 @@ MarkupSafe==2.1.1
 mysqlclient==2.1.0
 SQLAlchemy==1.4.36
 Werkzeug==2.1.2
+
+pip~=20.2.3
+setuptools~=49.2.1
+PyMySQL~=1.0.2
+pandas~=1.4.2

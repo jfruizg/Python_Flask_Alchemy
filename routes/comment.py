@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, make_response, session, flash
 from models.model import Comment, User
 from utils.db import db
-import xlrd
 import pandas as pd
 
 comment = Blueprint('python_comment_routes', __name__)
@@ -38,21 +37,6 @@ def show():
         comments_user = Comment.query.filter_by(user_id=user_id).all()
 
         return render_template('./comment/show.html', comments=comments_user)
-
-@comment.route('/import_excel', methods=['POST', 'GET'])
-def import_excel():
-    return render_template("./excel/index.html")
-
-@comment.route('/data', methods=['POST', 'GET'])
-def data():
-    if request.method == 'POST':
-        file = request.form["upload_excel_file"]
-        data = pd.read_excel(file)
-        return render_template("./excel/data.html", data = data)
-
-
-    return render_template()
-
 
 @comment.route('/delete/<id>')
 def delete_comment(id):
